@@ -7,13 +7,31 @@
 print("========================================")
 print("       STUDENT PERFORMANCE ANALYZER")
 print("========================================")
+print("")
+
+# Login
+print("Please login first")
+username = input("Enter username: ")
+pin = input("Enter PIN: ")
+
+if username == "student":
+    if pin == "1234":
+        print("Login Successful!")
+    else:
+        print("Login Failed: Incorrect PIN.")
+
+else:
+    print("Login Failed: Incorrect username.")
+
+print("")
 print("Enter the student's information below.")
+print("")
 
 # name
 name = input("What is the student's name? ")
 
 # grade
-grade = input("What grade level is the student in? ")
+grade = int(input("What grade level is the student in? "))
 
 # assignment average
 assignment_ave = float(input("What is the student's assignment average?"))
@@ -36,7 +54,6 @@ def calculate_grade(assignment_average, quiz_average, test_average):
     quiz_portion = quiz_average * 3/10
     test_portion = test_average * 4/10
     overall_grade = assignment_portion + quiz_portion + test_portion
-    print("Overall grade: " + str(overall_grade))
     return overall_grade
 overall_grade = float(calculate_grade(assignment_ave, quiz_ave, test_ave))
 
@@ -114,3 +131,75 @@ def check_good_standing(overall_grade, attendance):
         print("Good Standing: YES")
     else:
         print("Good Standing: NO")
+
+# Check for support
+def check_support(overall_grade, attendance):
+    if overall_grade <= 70 or attendance <= 80:
+        print("Additional Support: RECOMMENDED")
+    else:
+        print("Additional Support: NOT NEEDED")
+
+# special grade level message
+def grade_level_message(grade_level):
+    if grade_level == 9:
+        print("Welcome to your freshman year!")
+    elif grade_level == 10:
+        print("10 → Keep building your skills!")
+    elif grade_level == 11:
+        print("Junior year — keep pushing!")
+    elif grade_level == 12:
+        print("Senior year — finish strong!")
+    else:
+        print("Invalid grade level.")
+
+# find out the strongest academic category
+def strongest_category(assignment_average, quiz_average, test_average):
+    if assignment_average == quiz_average == test_average:
+        print("Strongest Category: Assignments, quiz, and test")
+    elif assignment_average == quiz_average and assignment_average > test_average:
+        print("Strongest Category: Assignments and quiz")
+    elif quiz_average == test_average and test_average > assignment_average:
+        print("Strongest Category: Test and quiz")
+    elif assignment_average == test_average and assignment_average > quiz_average:
+        print("Strongest Category: Assignments and test")
+    elif assignment_average > quiz_average and assignment_average > test_average:
+        print("Strongest Category: Assignments")
+    elif quiz_average > assignment_average and quiz_average > test_average:
+        print("Strongest Category: Quiz")
+    else:
+        print("Strongest Category: Test")
+
+# Final summary
+print("=============================================================")
+print("                      STUDENT SUMMARY                        ")
+print("=============================================================")
+print("")
+print("Student name: " + name)
+print("Student grade level: " + str(grade))
+print("")
+print("Assignment Average: " + str(assignment_ave))
+print("Quiz Average: " + str(quiz_ave))
+print("Test Average: " + str(test_ave))
+print("")
+print("Attendance: " + str(attend_percent) + "%")
+print("Missing Assignments: " + str(miss_assignment))
+print("Overall Grade: " + str(overall_grade))
+print("")
+letter_grade(overall_grade)
+print("")
+attendance_status(attend_percent)
+assignment_status(miss_assignment)
+print("")
+check_eligibility(overall_grade, attend_percent, miss_assignment)
+print("")
+check_high_honors(overall_grade, attend_percent, miss_assignment)
+print("")
+check_good_standing(overall_grade, attend_percent)
+print("")
+check_support(overall_grade, attend_percent)
+print("")
+strongest_category(assignment_ave, quiz_ave, test_ave)
+print("")
+grade_level_message(grade)
+print("")
+print("=============================================================")
